@@ -14,5 +14,7 @@ namespace TestWebApp.Application.Contracts.Database
         Task<Transaction> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
         Task<List<Transaction>> GetAsync(TransactionFilter filter, CancellationToken cancellationToken);
+
+        Task<List<Transaction>> GetWithAccountAsync(Guid accountId, CancellationToken cancellationToken);
     }
 }
