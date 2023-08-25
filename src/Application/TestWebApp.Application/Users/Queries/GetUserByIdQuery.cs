@@ -1,12 +1,15 @@
-﻿using AutoMapper;
-using FluentValidation;
-using MediatR;
-using TestWebApp.Application.Contracts.Database;
-using TestWebApp.Application.Users.Common;
-using TestWebApp.Domain;
-
-namespace TestWebApp.Application.Users.Queries
+﻿namespace TestWebApp.Application.Users.Queries
 {
+    using AutoMapper;
+    using FluentValidation;
+    using MediatR;
+    using System;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using TestWebApp.Application.Contracts.Database;
+    using TestWebApp.Application.Users.Common;
+    using TestWebApp.Domain;
+
     public record GetUserByIdQuery(Guid Id) : IRequest<UserResponse>;
 
     public sealed class GetUserByIdQueryValidator : AbstractValidator<GetUserByIdQuery>

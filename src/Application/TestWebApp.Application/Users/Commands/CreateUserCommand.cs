@@ -22,7 +22,7 @@
         public CreateUserCommandValidator(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-            RuleFor(u => u.Name).NotEmpty().MustAsync(IsUniqueName).WithMessage("Username already in use.");
+            RuleFor(u => u.Name).NotEmpty().MinimumLength(3).MustAsync(IsUniqueName).WithMessage("Username already in use.");
             RuleFor(u => u.Password).MinimumLength(8);
         }
 

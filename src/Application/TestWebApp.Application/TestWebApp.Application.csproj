@@ -24,8 +24,6 @@
 
 
 	<ItemGroup>
-    <Folder Include="Accounts\Common\" />
-    <Folder Include="Accounts\Queries\" />
     <Folder Include="Transactions\Queries\" />
   </ItemGroup>
 

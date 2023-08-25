@@ -1,16 +1,14 @@
-﻿using FluentValidation;
-using MediatR;
-using TestWebApp.Application.Contracts.Database;
-using TestWebApp.Application.Internal;
-using TestWebApp.Domain;
-
-namespace TestWebApp.Application.Users.Commands
+﻿namespace TestWebApp.Application.Users.Commands
 {
+    using FluentValidation;
+    using MediatR;
+    using TestWebApp.Application.Contracts.Database;
+    using TestWebApp.Application.Internal;
+    using TestWebApp.Domain;
+
     public class UpdateUserCommand : IRequest
     {
         public Guid Id { get; set; }
-
-        public string Name { get; set; } = default!;
 
         public string Password { get; set; } = default!;
     }
@@ -20,7 +18,6 @@ namespace TestWebApp.Application.Users.Commands
         UpdateUserCommandValidator()
         {
             RuleFor(u => u.Id).NotEmpty();
-            RuleFor(u => u.Name).NotEmpty();
             When(u => u.Password is not null && u.Password.Length > 0, () =>
                 {
                     RuleFor(u => u.Password).MinimumLength(8);
@@ -41,7 +38,6 @@ namespace TestWebApp.Application.Users.Commands
         {
             User u = await unitOfWork.Users.GetByIdAsync(request.Id, cancellationToken);
 
-            u.Name = request.Name;
             if (request.Password is not null && request.Password.Length > 0)
             {
                 u.PasswordSalt = Helpers.RandomBase64String(12);

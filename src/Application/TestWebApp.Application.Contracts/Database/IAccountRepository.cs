@@ -1,8 +1,10 @@
 ﻿namespace TestWebApp.Application.Contracts.Database
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
+    using TestWebApp.Application.Contracts.Database.Models;
     using TestWebApp.Domain;
 
     public interface IAccountRepository
@@ -15,6 +17,6 @@
 
         Task<Account> GetByIdAsync(Guid Id, CancellationToken cancellationToken);
 
-        Task<Account> GetAsync();
+        Task<List<Account>> GetAsync(AccountFilter filter, CancellationToken cancellationToken);
     }
 }
