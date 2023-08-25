@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34009.444
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{720DA291-6BAB-40FD-B08C-7F4436A1EB77}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{71E81D01-604B-4A72-BAD0-DE141A65A610}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{3B85BF3C-59F0-4649-A967-6B6FBCB8349B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{1EB9986D-CD10-42C0-8397-3ED4B91DBF80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{B97781B3-FDB2-4F60-9C21-C9854152319C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{99416EF0-7DF5-4443-AB26-A6BB90D8FFE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApp.Application", "src\Application\TestWebApp.Application\TestWebApp.Application.csproj", "{F768C7F5-07B3-43E3-9F1E-5FC2BFC30114}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApp.Application.Contracts", "src\Application\TestWebApp.Application.Contracts\TestWebApp.Application.Contracts.csproj", "{50E69068-6D09-4C6B-AAFF-0EC2E898C0D3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApp.Domain", "src\Domain\TestWebApp.Domain\TestWebApp.Domain.csproj", "{10B9568D-6B2C-4815-8165-BAE9A0ECF1A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApp.Infrastructure.Database.Mssql", "src\Infrastructure\TestWebApp.Infrastructure.Database.Mssql\TestWebApp.Infrastructure.Database.Mssql.csproj", "{8500B491-7311-42C1-B11D-90DF0B9977F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestWebApp", "TestWebApp", "{34DC4943-B805-4D21-8286-1F3BE005D62F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApp", "src\TestWebApp\TestWebApp\TestWebApp.csproj", "{D96558C6-99AC-48DB-B834-55E7C5F7B7C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F768C7F5-07B3-43E3-9F1E-5FC2BFC30114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F768C7F5-07B3-43E3-9F1E-5FC2BFC30114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F768C7F5-07B3-43E3-9F1E-5FC2BFC30114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F768C7F5-07B3-43E3-9F1E-5FC2BFC30114}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50E69068-6D09-4C6B-AAFF-0EC2E898C0D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50E69068-6D09-4C6B-AAFF-0EC2E898C0D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50E69068-6D09-4C6B-AAFF-0EC2E898C0D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50E69068-6D09-4C6B-AAFF-0EC2E898C0D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10B9568D-6B2C-4815-8165-BAE9A0ECF1A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10B9568D-6B2C-4815-8165-BAE9A0ECF1A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10B9568D-6B2C-4815-8165-BAE9A0ECF1A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10B9568D-6B2C-4815-8165-BAE9A0ECF1A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8500B491-7311-42C1-B11D-90DF0B9977F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8500B491-7311-42C1-B11D-90DF0B9977F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8500B491-7311-42C1-B11D-90DF0B9977F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8500B491-7311-42C1-B11D-90DF0B9977F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D96558C6-99AC-48DB-B834-55E7C5F7B7C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D96558C6-99AC-48DB-B834-55E7C5F7B7C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D96558C6-99AC-48DB-B834-55E7C5F7B7C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D96558C6-99AC-48DB-B834-55E7C5F7B7C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3B85BF3C-59F0-4649-A967-6B6FBCB8349B} = {720DA291-6BAB-40FD-B08C-7F4436A1EB77}
+		{1EB9986D-CD10-42C0-8397-3ED4B91DBF80} = {720DA291-6BAB-40FD-B08C-7F4436A1EB77}
+		{B97781B3-FDB2-4F60-9C21-C9854152319C} = {720DA291-6BAB-40FD-B08C-7F4436A1EB77}
+		{99416EF0-7DF5-4443-AB26-A6BB90D8FFE8} = {720DA291-6BAB-40FD-B08C-7F4436A1EB77}
+		{F768C7F5-07B3-43E3-9F1E-5FC2BFC30114} = {3B85BF3C-59F0-4649-A967-6B6FBCB8349B}
+		{50E69068-6D09-4C6B-AAFF-0EC2E898C0D3} = {3B85BF3C-59F0-4649-A967-6B6FBCB8349B}
+		{10B9568D-6B2C-4815-8165-BAE9A0ECF1A5} = {1EB9986D-CD10-42C0-8397-3ED4B91DBF80}
+		{8500B491-7311-42C1-B11D-90DF0B9977F5} = {B97781B3-FDB2-4F60-9C21-C9854152319C}
+		{34DC4943-B805-4D21-8286-1F3BE005D62F} = {720DA291-6BAB-40FD-B08C-7F4436A1EB77}
+		{D96558C6-99AC-48DB-B834-55E7C5F7B7C2} = {34DC4943-B805-4D21-8286-1F3BE005D62F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DEB72B6B-A570-45CF-84D7-E62220BA97F4}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\TestWebApp.Application\TestWebApp.Application.csproj" />
+    <ProjectReference Include="..\..\Domain\TestWebApp.Domain\TestWebApp.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\TestWebApp.Infrastructure.Database.Mssql\TestWebApp.Infrastructure.Database.Mssql.csproj" />
+  </ItemGroup>
+
+</Project>
