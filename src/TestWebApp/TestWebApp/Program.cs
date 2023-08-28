@@ -1,11 +1,19 @@
-using TestWebApp.Application;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using TestWebApp;
+using Microsoft.AspNetCore.Hosting;
 
+public static partial class Program
+{
+    public static async Task Main(string[] args) => await ApplicationLauncher.RunAsync<Startup>(args);
+}
+
+/*
 var builder = WebApplication.CreateBuilder(args);
 
+MssqlAdapterSettings MssqlSettings 
+
 builder.Services.AddApplicationLayer();
+builder.Services.add
+builder.Services.AddServices();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -20,6 +28,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -30,3 +39,4 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+*/

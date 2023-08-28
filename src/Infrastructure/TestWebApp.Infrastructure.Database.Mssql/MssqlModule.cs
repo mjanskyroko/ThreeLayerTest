@@ -11,7 +11,7 @@
 
     public static class MssqlModule
     {
-        public static IServiceCollection AddPostgresDatabaseLayer(this IServiceCollection services, PostgresAdapterSettings settings)
+        public static IServiceCollection AddMssqlDatabaseLayer(this IServiceCollection services, MssqlAdapterSettings settings)
         {
             services.AddDbContext<MssqlDbContext>(options =>
             {
@@ -20,15 +20,14 @@
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-
             services.AddScoped<IUserRepository, UserRepository>();
-
-            // TODO: Register repositories.
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
 
             return services;
         }
 
-        public static IApplicationBuilder MigratePostgresDb(this IApplicationBuilder builder)
+        public static IApplicationBuilder MigrateMssqlDb(this IApplicationBuilder builder)
         {
             using var scope = builder.ApplicationServices.CreateScope();
 
@@ -36,10 +35,10 @@
 
             if (dbContext is null)
             {
-                throw new ArgumentNullException(nameof(dbContext));
+                throw new ApplicationException(nameof(dbContext));
             }
 
-            if (dbContext.Database.GetPendingMigrations().Count() > 0)
+            if (dbContext.Database.GetPendingMigrations().Any())
             {
                 dbContext.Database.Migrate();
             }
@@ -48,9 +47,9 @@
         }
     }
 
-    public class PostgresAdapterSettings
+    public class MssqlAdapterSettings
     {
-        public const string Key = nameof(PostgresAdapterSettings);
+        public const string Key = nameof(MssqlAdapterSettings);
 
         public string Url { get; set; } = default!;
     }
