@@ -3,6 +3,7 @@
     using FluentValidation;
     using MediatR;
     using TestWebApp.Application.Contracts.Database;
+    using TestWebApp.Application.Contracts.Services;
     using TestWebApp.Application.Internal;
     using TestWebApp.Domain;
 
@@ -28,10 +29,12 @@
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly IPasswordService passwordService;
 
-        public UpdateUserCommandHandler(IUnitOfWork unitOfWork)
+        public UpdateUserCommandHandler(IUnitOfWork unitOfWork, IPasswordService passwordService)
         {
             this.unitOfWork = unitOfWork;
+            this.passwordService = passwordService;
         }
 
         public async Task Handle(UpdateUserCommand request, CancellationToken cancellationToken)
@@ -40,8 +43,9 @@
 
             if (request.Password is not null && request.Password.Length > 0)
             {
-                u.PasswordSalt = Helpers.RandomBase64String(12);
-                u.PasswordHash = Helpers.HashString(request.Password + u.PasswordSalt);
+                byte[] salt = passwordService.GenerateSalt();
+                u.Salt = Convert.ToBase64String(salt);
+                u.PasswordHash = passwordService.Hash(request.Password, salt);
             }
 
             unitOfWork.Users.Update(u);

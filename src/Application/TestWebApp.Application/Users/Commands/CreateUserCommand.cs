@@ -5,6 +5,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using TestWebApp.Application.Contracts.Database;
+    using TestWebApp.Application.Contracts.Services;
     using TestWebApp.Application.Internal;
     using TestWebApp.Domain;
 
@@ -19,7 +20,7 @@
     {
         private readonly IUnitOfWork unitOfWork;
 
-        public CreateUserCommandValidator(IUnitOfWork unitOfWork)
+        public CreateUserCommandValidator(IUnitOfWork unitOfWork, IPasswordService passwordService)
         {
             this.unitOfWork = unitOfWork;
             RuleFor(u => u.Name).NotEmpty().MinimumLength(3).MustAsync(IsUniqueName).WithMessage("Username already in use.");
@@ -35,20 +36,24 @@
     public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly IPasswordService passwordService;
 
-        public CreateUserCommandHandler(IUnitOfWork unitOfWork)
+        public CreateUserCommandHandler(IUnitOfWork unitOfWork, IPasswordService passwordService)
         {
             this.unitOfWork = unitOfWork;
+            this.passwordService = passwordService;
         }
 
         public async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             User u = new User();
 
+            byte[] salt = passwordService.GenerateSalt();
+
             u.Id = Guid.NewGuid();
             u.Name = request.Name;
-            u.PasswordSalt = Helpers.RandomBase64String(12);
-            u.PasswordHash = Helpers.HashString(request.Password + u.PasswordSalt);
+            u.Salt = Convert.ToBase64String(salt);
+            u.PasswordHash = passwordService.Hash(request.Password, salt);
             u.CreatedAt = DateTime.UtcNow;
 
             unitOfWork.Users.Create(u);

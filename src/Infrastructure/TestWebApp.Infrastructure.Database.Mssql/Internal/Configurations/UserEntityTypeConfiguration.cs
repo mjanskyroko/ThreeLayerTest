@@ -12,7 +12,7 @@ namespace TestWebApp.Infrastructure.Database.Mssql.Internal.Configurations
             builder.HasKey(u => u.Id);
             builder.Property(u => u.Name).HasMaxLength(32).IsRequired();
             builder.Property(u => u.PasswordHash).HasMaxLength(32).IsRequired();
-            builder.Property(u => u.PasswordSalt).HasMaxLength(32).IsRequired();
+            builder.Property(u => u.Salt).HasMaxLength(32).IsRequired();
             builder.Property(u => u.CreatedAt).IsRequired();
         }
     }

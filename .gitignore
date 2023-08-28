@@ -1,11 +1,4 @@
 .vs
-src/TestWebApp/TestWebApp/bin/
-src/TestWebApp/TestWebApp/obj/
-src/Application/TestWebApp.Application/bin/
-src/Application/TestWebApp.Application/obj/
-src/Application/TestWebApp.Application.Contracts/bin/
-src/Application/TestWebApp.Application.Contracts/obj/
-src/Domain/TestWebApp.Domain/bin/
-src/Domain/TestWebApp.Domain/obj/
-src/Infrastructure/TestWebApp.Infrastructure.Database.Mssql/bin/
-src/Infrastructure/TestWebApp.Infrastructure.Database.Mssql/obj/
+src/**/bin/
+src/**/obj/
+

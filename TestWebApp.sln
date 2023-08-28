@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApp.Infrastructure.D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestWebApp", "TestWebApp", "{34DC4943-B805-4D21-8286-1F3BE005D62F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApp", "src\TestWebApp\TestWebApp\TestWebApp.csproj", "{D96558C6-99AC-48DB-B834-55E7C5F7B7C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApp", "src\TestWebApp\TestWebApp\TestWebApp.csproj", "{D96558C6-99AC-48DB-B834-55E7C5F7B7C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApp.Infrastructure.Services", "src\Infrastructure\TestWebApp.Infrastructure.Services\TestWebApp.Infrastructure.Services.csproj", "{F9D031E5-1F29-4060-B75F-6E92C9F47920}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{D96558C6-99AC-48DB-B834-55E7C5F7B7C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D96558C6-99AC-48DB-B834-55E7C5F7B7C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D96558C6-99AC-48DB-B834-55E7C5F7B7C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9D031E5-1F29-4060-B75F-6E92C9F47920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9D031E5-1F29-4060-B75F-6E92C9F47920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9D031E5-1F29-4060-B75F-6E92C9F47920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9D031E5-1F29-4060-B75F-6E92C9F47920}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{8500B491-7311-42C1-B11D-90DF0B9977F5} = {B97781B3-FDB2-4F60-9C21-C9854152319C}
 		{34DC4943-B805-4D21-8286-1F3BE005D62F} = {720DA291-6BAB-40FD-B08C-7F4436A1EB77}
 		{D96558C6-99AC-48DB-B834-55E7C5F7B7C2} = {34DC4943-B805-4D21-8286-1F3BE005D62F}
+		{F9D031E5-1F29-4060-B75F-6E92C9F47920} = {B97781B3-FDB2-4F60-9C21-C9854152319C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DEB72B6B-A570-45CF-84D7-E62220BA97F4}

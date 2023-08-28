@@ -1,6 +1,7 @@
 ﻿namespace TestWebApp.Application.Internal.Mappings
 {
     using AutoMapper;
+    using TestWebApp.Application.Accounts.Common;
     using TestWebApp.Application.Transactions.Common;
     using TestWebApp.Application.Users.Common;
     using TestWebApp.Domain;
@@ -11,7 +12,7 @@
         {
             CreateMap<User, UserResponse>();
             CreateMap<Transaction, TransactionResponse>();
-            //CreateMap<Account, AccountResponse>();
+            CreateMap<Account, AccountResponse>();
         }
     }
 }

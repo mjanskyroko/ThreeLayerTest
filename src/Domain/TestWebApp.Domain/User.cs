@@ -10,7 +10,7 @@
 
         public string PasswordHash { get; set; } = default!;
 
-        public string PasswordSalt { get; set; } = default!;
+        public string Salt { get; set; } = default!;
 
         public DateTime CreatedAt { get; set; }
     }
