@@ -14,10 +14,12 @@
     public sealed class TransactionRepository : ITransactionRepository
     {
         private readonly DbSet<Transaction> transactions;
+        private readonly DbSet<Account> accounts;
 
         public TransactionRepository(MssqlDbContext context)
         {
             transactions = context.Set<Transaction>();
+            accounts = context.Set<Account>();
         }
 
         public void Create(Transaction u)
@@ -42,6 +44,16 @@
         public async Task<List<Transaction>> GetWithAccountAsync(Guid accountId, CancellationToken cancellationToken)
         {
             return await transactions.Where(t => t.From.Id == accountId || t.To.Id == accountId).ToListAsync(cancellationToken);
+        }
+
+        public async Task<List<Transaction>> GetWithUserAsync(Guid userId, CancellationToken cancellationToken)
+        {
+            List<Account> accs = await accounts.Where(a => a.Owner.Id == userId).ToListAsync(cancellationToken);
+
+            List<Transaction> transactions = new List<Transaction>(accs.Capacity);
+            foreach (var account in accs)
+                transactions.AddRange(await GetWithAccountAsync(account.Id, cancellationToken));
+            return transactions;
         }
     }
 }
