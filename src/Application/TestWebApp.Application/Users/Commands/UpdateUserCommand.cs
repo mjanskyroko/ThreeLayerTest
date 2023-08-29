@@ -14,7 +14,7 @@
         public string Password { get; set; } = default!;
     }
 
-    public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
+    internal class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
     {
         UpdateUserCommandValidator()
         {
@@ -26,7 +26,7 @@
         }
     }
 
-    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
+    internal class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IPasswordService passwordService;
