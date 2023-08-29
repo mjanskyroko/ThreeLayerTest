@@ -19,7 +19,7 @@ namespace TestWebApp.Application.Users.Queries
         public int Limit { get; set; }
     }
 
-    public class GetUsersQueryValidator : AbstractValidator<GetUsersQuery>
+    internal class GetUsersQueryValidator : AbstractValidator<GetUsersQuery>
     {
         public GetUsersQueryValidator()
         {
@@ -28,7 +28,7 @@ namespace TestWebApp.Application.Users.Queries
         }
     }
 
-    public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, List<UserResponse>>
+    internal class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, List<UserResponse>>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;

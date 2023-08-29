@@ -10,7 +10,7 @@ namespace TestWebApp.Application.Users.Commands
         public Guid Id { get; set; }
     }
 
-    public class DeleteUserByIdCommandValidator : AbstractValidator<DeleteUserByIdCommand>
+    internal class DeleteUserByIdCommandValidator : AbstractValidator<DeleteUserByIdCommand>
     {
         public DeleteUserByIdCommandValidator()
         {
@@ -18,7 +18,7 @@ namespace TestWebApp.Application.Users.Commands
         }
     }
 
-    public class DeleteUserByIdCommandHandler : IRequestHandler<DeleteUserByIdCommand>
+    internal class DeleteUserByIdCommandHandler : IRequestHandler<DeleteUserByIdCommand>
     {
         private readonly IUnitOfWork unitOfWork;
 

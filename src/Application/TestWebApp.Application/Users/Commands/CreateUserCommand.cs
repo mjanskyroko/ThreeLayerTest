@@ -16,7 +16,7 @@
         public string Password { get; set; } = default!;
     }
 
-    public sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+    internal sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -33,7 +33,7 @@
         }
     }
 
-    public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
+    internal sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IPasswordService passwordService;
