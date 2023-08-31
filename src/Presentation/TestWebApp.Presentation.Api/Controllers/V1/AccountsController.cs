@@ -16,7 +16,7 @@
         public AccountsController(IMediator mediator) : base(mediator) { }
 
         [AllowAnonymous]
-        [HttpPost("create")]
+        [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateAccountCommand command)
         {
             return await this.ProcessAsync(command);
@@ -30,21 +30,21 @@
         }
 
         [AllowAnonymous]
-        [HttpGet("account")]
+        [HttpGet("id")]
         public async Task<IActionResult> Get([FromQuery] GetAccountByIdQuery query)
         {
             return await this.ProcessAsync<GetAccountByIdQuery, AccountResponse>(query);
         }
 
         [AllowAnonymous]
-        [HttpDelete("delete")]
+        [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] DeleteAccountByIdCommand command)
         {
             return await this.ProcessAsync(command);
         }
 
         [AllowAnonymous]
-        [HttpPatch("update")]
+        [HttpPatch]
         public async Task<IActionResult> Update([FromBody] UpdateAccountCommand command)
         {
             return await this.ProcessAsync(command);

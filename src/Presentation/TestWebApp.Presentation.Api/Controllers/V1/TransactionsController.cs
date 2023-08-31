@@ -16,7 +16,7 @@
         public TransactionsController(IMediator mediator) : base(mediator) { }
 
         [AllowAnonymous]
-        [HttpPost("create")]
+        [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateTransactionCommand command)
         {
             return await this.ProcessAsync(command);
@@ -37,7 +37,7 @@
         }
 
         [AllowAnonymous]
-        [HttpGet("transaction")]
+        [HttpGet("id")]
         public async Task<IActionResult> Get([FromQuery] GetTransactionByIdQuery query)
         {
             return await this.ProcessAsync<GetTransactionByIdQuery, TransactionResponse>(query);

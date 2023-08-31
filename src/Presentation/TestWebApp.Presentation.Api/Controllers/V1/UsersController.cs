@@ -14,14 +14,14 @@
         public UsersController(IMediator mediator) : base(mediator) { }
 
         [AllowAnonymous]
-        [HttpPost("create")]
+        [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
         {
             return await this.ProcessAsync(command);
         }
 
         [AllowAnonymous]
-        [HttpGet("users")]
+        [HttpGet]
         public async Task<IActionResult> List([FromQuery] GetUsersQuery query)
         {
             return await this.ProcessAsync<GetUsersQuery, List<UserResponse>>(query);
@@ -29,21 +29,21 @@
 
 
         [AllowAnonymous]
-        [HttpGet("user")]
+        [HttpGet("id")]
         public async Task<IActionResult> Get([FromQuery] GetUserByIdQuery query)
         {
             return await this.ProcessAsync<GetUserByIdQuery, UserResponse>(query);
         }
 
         [AllowAnonymous]
-        [HttpDelete("delete")]
+        [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] DeleteUserByIdCommand command)
         {
             return await this.ProcessAsync(command);
         }
 
         [AllowAnonymous]
-        [HttpPut("update")]
+        [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateUserCommand command)
         {
             return await this.ProcessAsync(command);
