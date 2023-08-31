@@ -43,7 +43,7 @@
 
         public async Task Handle(UpdateAccountCommand request, CancellationToken cancellationToken)
         {
-            Account a = await unitOfWork.Accounts.GetByIdAsync(request.Id, cancellationToken);
+            Account a = await unitOfWork.Accounts.GetByIdSafeAsync(request.Id, cancellationToken);
 
             if (request.Name is not null)
                 a.Name = request.Name;

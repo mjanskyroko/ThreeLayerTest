@@ -17,6 +17,8 @@
         private static IServiceCollection AddApplicationConfiguration(this IServiceCollection services, params Assembly[] assemblies)
         {
             services.AddValidatorsFromAssemblies(assemblies, includeInternalTypes: true);
+            services.AddAutoMapper(assemblies);
+
 
             services.AddMediatR(c =>
             {

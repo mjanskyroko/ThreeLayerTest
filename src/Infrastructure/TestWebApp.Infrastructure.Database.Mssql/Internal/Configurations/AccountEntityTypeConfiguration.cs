@@ -12,7 +12,7 @@
             builder.ToTable("Accounts");
             builder.HasKey(a => a.Id);
             builder.Property(a => a.Name).HasMaxLength(32).IsRequired();
-            builder.Property(a => a.Balance).IsRequired();
+            builder.Property(a => a.Balance).IsRequired().HasPrecision(10, 2);
             builder.HasOne(a => a.Owner).WithMany().HasForeignKey(a => a.Id);
         }
     }

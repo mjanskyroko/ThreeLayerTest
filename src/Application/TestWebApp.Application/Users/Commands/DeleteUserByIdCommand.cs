@@ -29,7 +29,7 @@ namespace TestWebApp.Application.Users.Commands
 
         public async Task Handle(DeleteUserByIdCommand request, CancellationToken cancellationToken)
         {
-            User u = await unitOfWork.Users.GetByIdAsync(request.Id, cancellationToken);
+            User u = await unitOfWork.Users.GetByIdSafeAsync(request.Id, cancellationToken);
             unitOfWork.Users.Delete(u);
             await unitOfWork.SaveChangesAsync(cancellationToken);
         }

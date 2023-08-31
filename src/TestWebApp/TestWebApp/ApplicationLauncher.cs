@@ -10,7 +10,7 @@
     internal static class HostEnvironment
     {
         public const string Development = nameof(Development);
-        public const string Variable = "ASPNETCORE_ENVIROMENT";
+        public const string Variable = "ASPNETCORE_ENVIRONMENT";
     }
 
     internal static class ApplicationLauncher

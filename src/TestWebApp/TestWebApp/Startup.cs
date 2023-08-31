@@ -10,6 +10,7 @@
     using TestWebApp.Application;
     using TestWebApp.Infrastructure.Services;
     using Microsoft.Extensions.Hosting;
+    using TestWebApp.Presentation.Api;
 
     internal sealed class Startup
     {
@@ -34,10 +35,9 @@
             services.AddMssqlDatabaseLayer(this.MssqlSettings);
             services.AddApplicationLayer();
             services.AddServices();
-            
-            
-            // TODO: add presentation layer
-            //services.AddPresentationConfiguration(this.Environment);
+
+
+            services.AddPresentationLayer();
         }
 
         public void Configure(IApplicationBuilder app)

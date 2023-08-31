@@ -31,7 +31,7 @@
 
         public async Task Handle(DeleteAccountByIdCommand request, CancellationToken cancellationToken)
         {
-            Account a = await unitOfWork.Accounts.GetByIdAsync(request.Id, cancellationToken);
+            Account a = await unitOfWork.Accounts.GetByIdSafeAsync(request.Id, cancellationToken);
             unitOfWork.Accounts.Delete(a);
             await unitOfWork.SaveChangesAsync(cancellationToken);
         }

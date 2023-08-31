@@ -33,7 +33,7 @@
 
         public async Task<AccountResponse> Handle(GetAccountByIdQuery request, CancellationToken cancellationToken)
         {
-            Account a = await unitOfWork.Accounts.GetByIdAsync(request.Id, cancellationToken);
+            Account a = await unitOfWork.Accounts.GetByIdSafeAsync(request.Id, cancellationToken);
             return mapper.Map<AccountResponse>(a);
         }
     }

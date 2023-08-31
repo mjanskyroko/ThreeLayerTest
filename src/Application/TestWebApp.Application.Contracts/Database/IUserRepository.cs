@@ -15,7 +15,9 @@
 
         void Delete(User u);
 
-        Task<User> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+        Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+
+        Task<User> GetByIdSafeAsync(Guid id, CancellationToken cancellationToken);
 
         Task<User> GetByNameAsync(string name, CancellationToken cancellationToken);
 

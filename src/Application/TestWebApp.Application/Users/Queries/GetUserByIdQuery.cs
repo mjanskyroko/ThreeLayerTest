@@ -33,7 +33,7 @@
 
         public async Task<UserResponse> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
-            User u = await unitOfWork.Users.GetByIdAsync(request.Id, cancellationToken);
+            User u = await unitOfWork.Users.GetByIdSafeAsync(request.Id, cancellationToken);
             return mapper.Map<UserResponse>(u);
         }
     }

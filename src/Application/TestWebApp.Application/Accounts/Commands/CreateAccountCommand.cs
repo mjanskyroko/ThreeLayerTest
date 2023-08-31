@@ -25,15 +25,8 @@
 
         public async Task<bool> OwnerExists(Guid Id, CancellationToken cancellationToken)
         {
-            try
-            {
-                User owner = await unitOfWork.Users.GetByIdAsync(Id, cancellationToken);
-            }
-            catch (ApplicationException)
-            {
-                return false;
-            }
-            return true;
+            User? owner = await unitOfWork.Users.GetByIdAsync(Id, cancellationToken);
+            return owner is not null;
         }
     }
 

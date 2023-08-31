@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <OutputType>Exe</OutputType>
+    <UserSecretsId>00e40255-12fb-4166-85ac-62f75ed647d1</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +13,7 @@
     <ProjectReference Include="..\..\Domain\TestWebApp.Domain\TestWebApp.Domain.csproj" />
     <ProjectReference Include="..\..\Infrastructure\TestWebApp.Infrastructure.Database.Mssql\TestWebApp.Infrastructure.Database.Mssql.csproj" />
     <ProjectReference Include="..\..\Infrastructure\TestWebApp.Infrastructure.Services\TestWebApp.Infrastructure.Services.csproj" />
+    <ProjectReference Include="..\..\Presentation\TestWebApp.Presentation.Api\TestWebApp.Presentation.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -15,7 +15,9 @@
 
         void Delete(Account a);
 
-        Task<Account> GetByIdAsync(Guid Id, CancellationToken cancellationToken);
+        Task<Account?> GetByIdAsync(Guid Id, CancellationToken cancellationToken);
+
+        Task<Account> GetByIdSafeAsync(Guid Id, CancellationToken cancellationToken);
 
         Task<List<Account>> GetAsync(AccountFilter filter, CancellationToken cancellationToken);
     }

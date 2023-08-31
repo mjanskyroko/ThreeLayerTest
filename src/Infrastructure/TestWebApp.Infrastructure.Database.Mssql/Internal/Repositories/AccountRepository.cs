@@ -43,7 +43,12 @@
                 .Skip(filter.Offset).Take(filter.Limit).ToListAsync(cancellationToken);
         }
 
-        public async Task<Account> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<Account?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return await accounts.FindAsync(new object[] { id }, cancellationToken);
+        }
+
+        public async Task<Account> GetByIdSafeAsync(Guid id, CancellationToken cancellationToken)
         {
             return await accounts.FindAsync(new object[] { id }, cancellationToken) ?? throw new ApplicationException($"Unable to find Account {id}.");
         }

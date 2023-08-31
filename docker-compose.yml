@@ -1,0 +1,15 @@
+services:
+  threelayertest-mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql
+    volumes:
+      - U:/Mssql/data:/var/opt/mssql/data
+      - U:/Mssql/log:/var/opt/mssql/log
+      - U:/Mssql/secrets:/var/opt/mssql/secrets
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: yourStrong(!)Password
+      MSSQL_PID: Developer
+    restart: unless-stopped
+    ports:
+      - "1433:1433"

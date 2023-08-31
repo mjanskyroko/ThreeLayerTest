@@ -18,11 +18,20 @@ namespace TestWebApp.Application.Transactions.Commands
 
     internal sealed class CreateTransactionCommandValidator : AbstractValidator<CreateTransactionCommand>
     {
-        public CreateTransactionCommandValidator()
+        public IAccountRepository accounts;
+
+        public CreateTransactionCommandValidator(IAccountRepository accounts)
         {
-            RuleFor(t => t.From).NotEmpty();
-            RuleFor(t => t.To).NotEmpty();
+            this.accounts = accounts;
+            RuleFor(t => t.From).NotEmpty().MustAsync(AccountExists);
+            RuleFor(t => t.To).NotEmpty().MustAsync(AccountExists);
             RuleFor(t => t.Amount).GreaterThan(0m);
+        }
+
+        public async Task<bool> AccountExists(Guid id, CancellationToken cancellationToken)
+        {
+            Account? account = await accounts.GetByIdAsync(id, cancellationToken);
+            return account is not null;
         }
     }
 
@@ -39,8 +48,8 @@ namespace TestWebApp.Application.Transactions.Commands
         {
             Transaction t = new Transaction();
             t.Id = Guid.NewGuid();
-            t.From = await unitOfWork.Accounts.GetByIdAsync(request.From, cancellationToken);
-            t.To = await unitOfWork.Accounts.GetByIdAsync(request.To, cancellationToken);
+            t.From = await unitOfWork.Accounts.GetByIdSafeAsync(request.From, cancellationToken);
+            t.To = await unitOfWork.Accounts.GetByIdSafeAsync(request.To, cancellationToken);
             t.Amount = request.Amount;
 
             unitOfWork.Transactions.Create(t);

@@ -16,7 +16,7 @@
 
     internal class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
     {
-        UpdateUserCommandValidator()
+        public UpdateUserCommandValidator()
         {
             RuleFor(u => u.Id).NotEmpty();
             When(u => u.Password is not null && u.Password.Length > 0, () =>
@@ -39,7 +39,7 @@
 
         public async Task Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            User u = await unitOfWork.Users.GetByIdAsync(request.Id, cancellationToken);
+            User u = await unitOfWork.Users.GetByIdSafeAsync(request.Id, cancellationToken);
 
             if (request.Password is not null && request.Password.Length > 0)
             {

@@ -38,12 +38,17 @@
                 .ToListAsync(cancellationToken);
         }
 
-        public async Task<User> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return await users.FindAsync(new object[] { id }, cancellationToken);
+        }
+
+        public async Task<User> GetByIdSafeAsync(Guid id, CancellationToken cancellationToken)
         {
             return await users.FindAsync(new object[] { id }, cancellationToken) ?? throw new ApplicationException($"Unable to find user {id}.");
         }
 
-        public async Task<User> GetByNameAsync(string name, CancellationToken cancellationToken)
+        public async Task<User?> GetByNameAsync(string name, CancellationToken cancellationToken)
         {
             return await users.SingleOrDefaultAsync(u => u.Name == name, cancellationToken);
         }
