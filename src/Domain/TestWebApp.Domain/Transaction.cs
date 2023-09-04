@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace TestWebApp.Domain
+﻿namespace TestWebApp.Domain
 {
+    using System;
 
     public class Transaction
     {

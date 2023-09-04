@@ -1,10 +1,10 @@
-﻿using FluentValidation;
-using MediatR;
-using TestWebApp.Application.Contracts.Database;
-using TestWebApp.Domain;
-
-namespace TestWebApp.Application.Transactions.Commands
+﻿namespace TestWebApp.Application.Transactions.Commands
 {
+    using FluentValidation;
+    using MediatR;
+    using TestWebApp.Application.Contracts.Database;
+    using TestWebApp.Domain;
+
     public class CreateTransactionCommand : IRequest
     {
         public Guid Id { get; set; }
@@ -18,11 +18,11 @@ namespace TestWebApp.Application.Transactions.Commands
 
     internal sealed class CreateTransactionCommandValidator : AbstractValidator<CreateTransactionCommand>
     {
-        public IAccountRepository accounts;
+        public IUnitOfWork unitOfWork;
 
-        public CreateTransactionCommandValidator(IAccountRepository accounts)
+        public CreateTransactionCommandValidator(IUnitOfWork accounts)
         {
-            this.accounts = accounts;
+            this.unitOfWork = accounts;
             RuleFor(t => t.From).NotEmpty().MustAsync(AccountExists);
             RuleFor(t => t.To).NotEmpty().MustAsync(AccountExists);
             RuleFor(t => t.Amount).GreaterThan(0m);
@@ -30,7 +30,7 @@ namespace TestWebApp.Application.Transactions.Commands
 
         public async Task<bool> AccountExists(Guid id, CancellationToken cancellationToken)
         {
-            Account? account = await accounts.GetByIdAsync(id, cancellationToken);
+            Account? account = await unitOfWork.Accounts.GetByIdAsync(id, cancellationToken);
             return account is not null;
         }
     }

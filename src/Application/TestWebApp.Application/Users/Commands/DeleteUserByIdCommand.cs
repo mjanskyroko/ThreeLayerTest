@@ -1,10 +1,10 @@
-﻿using FluentValidation;
-using MediatR;
-using TestWebApp.Application.Contracts.Database;
-using TestWebApp.Domain;
-
-namespace TestWebApp.Application.Users.Commands
+﻿namespace TestWebApp.Application.Users.Commands
 {
+    using FluentValidation;
+    using MediatR;
+    using TestWebApp.Application.Contracts.Database;
+    using TestWebApp.Domain;
+
     public class DeleteUserByIdCommand : IRequest
     {
         public Guid Id { get; set; }

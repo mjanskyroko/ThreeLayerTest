@@ -1,7 +1,7 @@
-﻿using TestWebApp.Application.Contracts.Database;
-
-namespace TestWebApp.Infrastructure.Database.Mssql.Internal
+﻿namespace TestWebApp.Infrastructure.Database.Mssql.Internal
 {
+    using TestWebApp.Application.Contracts.Database;
+
     public sealed class UnitOfWork : IUnitOfWork
     {
         private readonly MssqlDbContext context;

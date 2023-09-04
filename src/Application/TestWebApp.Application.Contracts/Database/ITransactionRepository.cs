@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using TestWebApp.Application.Contracts.Database.Models;
-using TestWebApp.Domain;
-
-namespace TestWebApp.Application.Contracts.Database
+﻿namespace TestWebApp.Application.Contracts.Database
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using TestWebApp.Application.Contracts.Database.Models;
+    using TestWebApp.Domain;
+
     public interface ITransactionRepository
     {
         void Create(Transaction u);

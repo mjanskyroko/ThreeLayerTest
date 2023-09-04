@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using FluentValidation;
-using MediatR;
-using TestWebApp.Application.Contracts.Database;
-using TestWebApp.Application.Contracts.Database.Models;
-using TestWebApp.Application.Users.Common;
-using TestWebApp.Domain;
-
-namespace TestWebApp.Application.Users.Queries
+﻿namespace TestWebApp.Application.Users.Queries
 {
+    using AutoMapper;
+    using FluentValidation;
+    using MediatR;
+    using TestWebApp.Application.Contracts.Database;
+    using TestWebApp.Application.Contracts.Database.Models;
+    using TestWebApp.Application.Users.Common;
+    using TestWebApp.Domain;
+
     public class GetUsersQuery : IRequest<List<UserResponse>>
     {
         public string? Name { get; set; }

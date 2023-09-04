@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TestWebApp.Domain;
-
-namespace TestWebApp.Infrastructure.Database.Mssql.Internal.Configurations
+﻿namespace TestWebApp.Infrastructure.Database.Mssql.Internal.Configurations
 {
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using TestWebApp.Domain;
+
     internal sealed class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
