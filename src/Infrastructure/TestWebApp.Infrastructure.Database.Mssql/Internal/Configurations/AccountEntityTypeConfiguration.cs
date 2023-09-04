@@ -13,6 +13,7 @@
             builder.HasKey(a => a.Id);
             builder.Property(a => a.Name).HasMaxLength(32).IsRequired();
             builder.Property(a => a.Balance).IsRequired().HasPrecision(10, 2);
+            builder.Property(a => a.IsActive).IsRequired();
             builder.HasOne(a => a.Owner).WithMany().HasForeignKey(a => a.Id);
         }
     }

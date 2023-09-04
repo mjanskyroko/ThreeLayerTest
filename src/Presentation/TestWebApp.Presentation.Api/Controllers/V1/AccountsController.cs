@@ -23,10 +23,10 @@
         }
 
         [AllowAnonymous]
-        [HttpGet("from-user")]
-        public async Task<IActionResult> FromUser([FromQuery] GetAccountsFromUserQuery query)
+        [HttpGet]
+        public async Task<IActionResult> FromUser([FromQuery] GetAccountsQuery query)
         {
-            return await this.ProcessAsync<GetAccountsFromUserQuery, List<AccountResponse>>(query);
+            return await this.ProcessAsync<GetAccountsQuery, List<AccountResponse>>(query);
         }
 
         [AllowAnonymous]

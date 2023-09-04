@@ -43,9 +43,10 @@
         {
             Account a = new Account();
             a.Id = Guid.NewGuid();
-            a.Owner = await unitOfWork.Users.GetByIdAsync(request.Owner, cancellationToken);
+            a.Owner = await unitOfWork.Users.GetByIdSafeAsync(request.Owner, cancellationToken);
             a.Name = request.Name;
             a.Balance = 0m;
+            a.IsActive = true;
 
             unitOfWork.Accounts.Create(a);
             await unitOfWork.SaveChangesAsync(cancellationToken);

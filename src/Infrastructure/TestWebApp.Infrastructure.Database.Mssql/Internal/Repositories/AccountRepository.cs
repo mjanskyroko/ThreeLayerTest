@@ -39,7 +39,7 @@
         {
             return await accounts.WhereIf(filter.OwnerId is not null, a => a.Owner.Id == filter.OwnerId)
                 .WhereIf(filter.Name is not null, a => a.Name == filter.Name)
-                .WhereIf(filter.Balance is not null, a => a.Balance == filter.Balance)
+                .WhereIf(filter.IsActive is not null, a => a.IsActive == filter.IsActive)
                 .Skip(filter.Offset).Take(filter.Limit).ToListAsync(cancellationToken);
         }
 

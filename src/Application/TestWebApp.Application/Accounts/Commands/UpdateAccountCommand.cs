@@ -15,6 +15,8 @@
         public string? Name { get; set; }
 
         public decimal? Balance { get; set; }
+
+        public bool? IsActive { get; set; }
     }
 
     internal sealed class UpdateAccountCommandValidator : AbstractValidator<UpdateAccountCommand>
@@ -49,6 +51,8 @@
                 a.Name = request.Name;
             if (request.Balance is not null)
                 a.Balance = request.Balance.Value;
+            if (request.IsActive is not null)
+                a.IsActive = request.IsActive.Value;
 
             unitOfWork.Accounts.Update(a);
             await unitOfWork.SaveChangesAsync(cancellationToken);

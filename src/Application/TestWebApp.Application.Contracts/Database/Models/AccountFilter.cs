@@ -8,7 +8,7 @@
 
         public Guid? OwnerId { get; set; }
 
-        public decimal? Balance { get; set; }
+        public bool? IsActive { get; set; }
 
         public int Offset { get; set; }
 
