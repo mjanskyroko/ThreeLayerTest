@@ -1,5 +1,6 @@
 ﻿namespace TestWebApp.Infrastructure.Services.Internal
 {
+    using Microsoft.Extensions.Options;
     using System;
     using System.Security.Cryptography;
     using System.Text;
@@ -11,8 +12,12 @@
 
         private static readonly RandomNumberGenerator rng = RandomNumberGenerator.Create();
         private static readonly SHA256 hasher = SHA256.Create();
-        private static readonly int HashCount = 128;
-        private static readonly int DefaultSaltSize = 12;
+        private readonly ServicesSettings settings;
+
+        public PasswordService(IOptions<ServicesSettings> opts)
+        {
+            settings = opts.Value;
+        }
 
         private byte[] GenerateSalt(int length)
         {
@@ -23,7 +28,7 @@
 
         public byte[] GenerateSalt()
         {
-            return GenerateSalt(DefaultSaltSize);
+            return GenerateSalt(settings.SaltLength);
         }
 
         public string Hash(string password, byte[] salt)
@@ -35,7 +40,7 @@
             Buffer.BlockCopy(salt, 0, block, passwordUtf8.Length, salt.Length);
 
             byte[] hash = block;
-            for (int i = 0; i < HashCount; i++)
+            for (int i = 0; i < settings.HashCount; i++)
                 hash = hasher.ComputeHash(hash);
 
             return Convert.ToBase64String(hash);
