@@ -13,6 +13,7 @@
             builder.ToTable("Transactions");
             builder.HasKey(t => t.Id);
             builder.Property(t => t.Amount).IsRequired().HasPrecision(10, 2);
+            builder.Property(t => t.CreatedAt).IsRequired();
             builder.HasOne(t => t.From).WithMany().HasForeignKey(t => t.Id).OnDelete(DeleteBehavior.NoAction);
             builder.HasOne(t => t.To).WithMany().HasForeignKey(t => t.Id).OnDelete(DeleteBehavior.NoAction);
         }

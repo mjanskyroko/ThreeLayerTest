@@ -10,6 +10,8 @@
 
         public Account To { get; set; } = default!;
 
+        public DateTime CreatedAt { get; set; }
+
         public decimal Amount { get; set; }
     }
 }

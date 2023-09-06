@@ -51,6 +51,7 @@
             t.From = await unitOfWork.Accounts.GetByIdSafeAsync(request.From, cancellationToken);
             t.To = await unitOfWork.Accounts.GetByIdSafeAsync(request.To, cancellationToken);
             t.Amount = request.Amount;
+            t.CreatedAt = DateTime.UtcNow;
 
             unitOfWork.Transactions.Create(t);
             await unitOfWork.SaveChangesAsync(cancellationToken);

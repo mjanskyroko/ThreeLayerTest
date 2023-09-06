@@ -29,10 +29,13 @@
 
         public async Task<List<Transaction>> GetAsync(TransactionFilter filter, CancellationToken cancellationToken)
         {
-            return await transactions.WhereIf(filter.AccountFrom is not null, t => t.From.Id == filter.AccountFrom)
+            return await transactions
+                .WhereIf(filter.AccountFrom is not null, t => t.From.Id == filter.AccountFrom)
                 .WhereIf(filter.AccountTo is not null, t => t.To.Id == filter.AccountTo)
-                .WhereIf(filter.MinAmount is not null, t => t.Amount >= filter.MinAmount)
-                .WhereIf(filter.MaxAmount is not null, t => t.Amount <= filter.MaxAmount)
+                .WhereIf(filter.AmountMinimum is not null, t => t.Amount >= filter.AmountMinimum)
+                .WhereIf(filter.AmountMaximum is not null, t => t.Amount <= filter.AmountMaximum)
+                .WhereIf(filter.DateFrom is not null, t => t.CreatedAt >= filter.DateFrom)
+                .WhereIf(filter.DateTo is not null, t => t.CreatedAt <= filter.DateTo)
                 .Skip(filter.Offset).Take(filter.Limit).ToListAsync(cancellationToken);
         }
 

@@ -8,9 +8,13 @@
 
         public Guid? AccountTo { get; set; }
 
-        public decimal? MinAmount { get; set; }
+        public DateTime? DateFrom { get; set; }
 
-        public decimal? MaxAmount { get; set; }
+        public DateTime? DateTo { get; set; }
+
+        public decimal? AmountMinimum { get; set; }
+
+        public decimal? AmountMaximum { get; set; }
 
         public int Offset { get; set; }
 
