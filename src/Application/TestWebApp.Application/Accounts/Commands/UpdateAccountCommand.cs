@@ -27,10 +27,6 @@
         {
             this.unitOfWork = unitOfWork;
             RuleFor(a => a.Id).NotEmpty();
-            When(a => a.Name is not null, () =>
-                {
-                    RuleFor(a => a.Name).MinimumLength(3);
-                });
         }
     }
 

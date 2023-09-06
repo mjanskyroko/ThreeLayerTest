@@ -2,6 +2,7 @@
 {
     using FluentValidation;
     using MediatR;
+    using Microsoft.Extensions.Options;
     using System.Threading;
     using System.Threading.Tasks;
     using TestWebApp.Application.Contracts.Database;
@@ -19,12 +20,14 @@
     internal sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly ValidationSettings opts;
 
-        public CreateUserCommandValidator(IUnitOfWork unitOfWork, IPasswordService passwordService)
+        public CreateUserCommandValidator(IUnitOfWork unitOfWork, IOptions<ValidationSettings> options, IPasswordService passwordService)
         {
             this.unitOfWork = unitOfWork;
-            RuleFor(u => u.Name).NotEmpty().MinimumLength(3).MustAsync(IsUniqueName).WithMessage("Username already in use.");
-            RuleFor(u => u.Password).MinimumLength(8);
+            this.opts = options.Value;
+            RuleFor(u => u.Name).NotEmpty().MinimumLength(opts.MinimumUsernameLength).MustAsync(IsUniqueName).WithMessage("Username already in use.");
+            RuleFor(u => u.Password).MinimumLength(opts.MinimumPasswordLength);
         }
 
         private async Task<bool> IsUniqueName(string name, CancellationToken cancellationToken)

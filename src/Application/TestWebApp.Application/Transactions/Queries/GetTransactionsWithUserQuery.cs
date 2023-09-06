@@ -3,6 +3,7 @@
     using AutoMapper;
     using FluentValidation;
     using MediatR;
+    using Microsoft.Extensions.Options;
     using System;
     using System.Threading;
     using System.Threading.Tasks;
@@ -10,13 +11,18 @@
     using TestWebApp.Application.Transactions.Common;
     using TestWebApp.Domain;
 
-    public record GetTransactionsWithUserQuery(Guid UserId) : IRequest<List<TransactionResponse>>;
+    public record GetTransactionsWithUserQuery(Guid UserId, int Offset, int Limit) : IRequest<List<TransactionResponse>>;
 
     internal sealed class GetTransactionsWithUserQueryValidator : AbstractValidator<GetTransactionsWithUserQuery>
     {
-        public GetTransactionsWithUserQueryValidator()
+        private readonly ValidationSettings opts;
+
+        public GetTransactionsWithUserQueryValidator(IOptions<ValidationSettings> options)
         {
+            opts = options.Value;
             RuleFor(t => t.UserId).NotEmpty();
+            RuleFor(t => t.Offset).GreaterThanOrEqualTo(0);
+            RuleFor(t => t.Limit).GreaterThan(0).LessThanOrEqualTo(opts.MaxLimit);
         }
     }
 

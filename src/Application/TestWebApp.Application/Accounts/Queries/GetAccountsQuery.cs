@@ -3,6 +3,7 @@
     using AutoMapper;
     using FluentValidation;
     using MediatR;
+    using Microsoft.Extensions.Options;
     using System;
     using System.Threading;
     using System.Threading.Tasks;
@@ -15,10 +16,13 @@
 
     internal sealed class GetAccountsQueryValidator : AbstractValidator<GetAccountsQuery>
     {
-        public GetAccountsQueryValidator()
+        private readonly ValidationSettings opts;
+
+        public GetAccountsQueryValidator(IOptions<ValidationSettings> options)
         {
+            opts = options.Value;
             RuleFor(q => q.Offset).GreaterThanOrEqualTo(0);
-            RuleFor(q => q.Limit).GreaterThan(0).LessThanOrEqualTo(100);
+            RuleFor(q => q.Limit).GreaterThan(0).LessThanOrEqualTo(opts.MaxLimit);
         }
     }
 

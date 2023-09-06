@@ -2,6 +2,7 @@
 {
     using FluentValidation;
     using MediatR;
+    using Microsoft.Extensions.Options;
     using TestWebApp.Application.Contracts.Database;
     using TestWebApp.Application.Contracts.Services;
     using TestWebApp.Application.Internal;
@@ -16,12 +17,15 @@
 
     internal class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
     {
-        public UpdateUserCommandValidator()
+        private readonly ValidationSettings opts;
+
+        public UpdateUserCommandValidator(IOptions<ValidationSettings> options)
         {
+            opts = options.Value;
             RuleFor(u => u.Id).NotEmpty();
-            When(u => u.Password is not null && u.Password.Length > 0, () =>
+            When(u => !string.IsNullOrEmpty(u.Password), () =>
                 {
-                    RuleFor(u => u.Password).MinimumLength(8);
+                    RuleFor(u => u.Password).MinimumLength(opts.MinimumPasswordLength);
                 });
         }
     }

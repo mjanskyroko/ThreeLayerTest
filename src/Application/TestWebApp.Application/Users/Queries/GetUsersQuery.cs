@@ -3,6 +3,7 @@
     using AutoMapper;
     using FluentValidation;
     using MediatR;
+    using Microsoft.Extensions.Options;
     using TestWebApp.Application.Contracts.Database;
     using TestWebApp.Application.Contracts.Database.Models;
     using TestWebApp.Application.Users.Common;
@@ -21,10 +22,13 @@
 
     internal class GetUsersQueryValidator : AbstractValidator<GetUsersQuery>
     {
-        public GetUsersQueryValidator()
+        private readonly ValidationSettings opts;
+
+        public GetUsersQueryValidator(IOptions<ValidationSettings> options)
         {
+            opts = options.Value;
             RuleFor(u => u.Offset).GreaterThanOrEqualTo(0);
-            RuleFor(u => u.Limit).GreaterThan(0).LessThanOrEqualTo(100);
+            RuleFor(u => u.Limit).GreaterThan(0).LessThanOrEqualTo(opts.MaxLimit);
         }
     }
 

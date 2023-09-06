@@ -3,19 +3,25 @@
     using AutoMapper;
     using FluentValidation;
     using MediatR;
+    using Microsoft.Extensions.Options;
     using System.Threading;
     using System.Threading.Tasks;
     using TestWebApp.Application.Contracts.Database;
     using TestWebApp.Application.Transactions.Common;
     using TestWebApp.Domain;
 
-    public record GetTransactionsWithAccountQuery(Guid AccountId) : IRequest<List<TransactionResponse>>;
+    public record GetTransactionsWithAccountQuery(Guid AccountId, int Offset, int Limit) : IRequest<List<TransactionResponse>>;
 
     internal sealed class GetTransactionsWithAccountQueryValidator : AbstractValidator<GetTransactionsWithAccountQuery>
     {
-        public GetTransactionsWithAccountQueryValidator()
+        private readonly ValidationSettings opts;
+
+        public GetTransactionsWithAccountQueryValidator(IOptions<ValidationSettings> options)
         {
+            this.opts = options.Value;
             RuleFor(t => t.AccountId).NotEmpty();
+            RuleFor(t => t.Offset).GreaterThanOrEqualTo(0);
+            RuleFor(t => t.Limit).GreaterThan(0).LessThanOrEqualTo(opts.MaxLimit);
         }
     }
 
