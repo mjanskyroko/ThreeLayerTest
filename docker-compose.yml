@@ -1,11 +1,13 @@
+version: "3"
 services:
   threelayertest-mssql:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: mssql
+    user: "10001"
     volumes:
-      - U:/Mssql/data:/var/opt/mssql/data
-      - U:/Mssql/log:/var/opt/mssql/log
-      - U:/Mssql/secrets:/var/opt/mssql/secrets
+      - /home/test/mssql/data:/var/opt/mssql/data
+      - /home/test/mssql/log:/var/opt/mssql/log
+      - /home/test/mssql/secrets:/var/opt/mssql/secrets
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: yourStrong(!)Password

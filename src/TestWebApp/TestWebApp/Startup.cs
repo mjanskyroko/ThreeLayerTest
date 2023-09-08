@@ -1,6 +1,7 @@
 ﻿namespace TestWebApp
 {
     using System;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,8 @@
     using TestWebApp.Infrastructure.Services;
     using Microsoft.Extensions.Hosting;
     using TestWebApp.Presentation.Api;
+    using Microsoft.AspNetCore.Routing;
+    using Hellang.Middleware.ProblemDetails;
 
     internal sealed class Startup
     {
@@ -35,19 +38,20 @@
             services.AddMssqlDatabaseLayer(this.MssqlSettings);
             services.AddApplicationLayer();
             services.AddServices();
-
-
             services.AddPresentationLayer();
         }
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseProblemDetails();
+
             if (!this.Environment.IsDevelopment())
             {
                 app.UseHsts();
             }
 
             app.MigrateMssqlDb(); // Does migration
+
 
             app.UseHttpsRedirection();
 
@@ -65,6 +69,7 @@
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllers();
             });
         }
     }
