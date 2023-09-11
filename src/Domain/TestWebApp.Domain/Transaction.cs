@@ -8,7 +8,11 @@
 
         public Account From { get; set; } = default!;
 
+        public Guid FromId { get; set; }
+
         public Account To { get; set; } = default!;
+
+        public Guid ToId { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

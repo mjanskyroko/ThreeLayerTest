@@ -24,7 +24,7 @@
 
         public void Create(Transaction u)
         {
-            throw new NotImplementedException();
+            transactions.Add(u);
         }
 
         public async Task<List<Transaction>> GetAsync(TransactionFilter filter, CancellationToken cancellationToken)

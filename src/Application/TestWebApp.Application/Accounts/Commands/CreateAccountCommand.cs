@@ -2,6 +2,7 @@
 {
     using FluentValidation;
     using MediatR;
+    using Microsoft.Extensions.Options;
     using TestWebApp.Application.Contracts.Database;
     using TestWebApp.Domain;
 
@@ -15,12 +16,14 @@
     internal sealed class CreateAccountCommandValidator : AbstractValidator<CreateAccountCommand>
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly ValidationSettings opts;
 
-        public CreateAccountCommandValidator(IUnitOfWork unitOfWork)
+        public CreateAccountCommandValidator(IUnitOfWork unitOfWork, IOptions<ValidationSettings> options)
         {
             this.unitOfWork = unitOfWork;
+            this.opts = options.Value;
             RuleFor(a => a.Owner).NotEmpty().MustAsync(OwnerExists).WithMessage("Account owner does not exist.");
-            RuleFor(a => a.Name).NotEmpty();
+            RuleFor(a => a.Name).NotEmpty().MaximumLength(opts.MaximumAccountNameLength);
         }
 
         public async Task<bool> OwnerExists(Guid Id, CancellationToken cancellationToken)
@@ -41,9 +44,11 @@
 
         public async Task Handle(CreateAccountCommand request, CancellationToken cancellationToken)
         {
+            User u = await unitOfWork.Users.GetByIdSafeAsync(request.Owner, cancellationToken);
             Account a = new Account();
             a.Id = Guid.NewGuid();
-            a.Owner = await unitOfWork.Users.GetByIdSafeAsync(request.Owner, cancellationToken);
+            a.Owner = u;
+            a.OwnerId = u.Id;
             a.Name = request.Name;
             a.Balance = 0m;
             a.IsActive = true;

@@ -23,6 +23,13 @@
         }
 
         [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> List([FromQuery] GetTransactionsQuery query)
+        {
+            return await this.ProcessAsync<GetTransactionsQuery, List<TransactionResponse>>(query);
+        }
+
+        [AllowAnonymous]
         [HttpGet("with-account")]
         public async Task<IActionResult> WithAccount([FromQuery] GetTransactionsWithAccountQuery query)
         {

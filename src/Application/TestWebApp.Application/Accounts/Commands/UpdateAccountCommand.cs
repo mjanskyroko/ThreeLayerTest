@@ -2,6 +2,7 @@
 {
     using FluentValidation;
     using MediatR;
+    using Microsoft.Extensions.Options;
     using System;
     using System.Threading;
     using System.Threading.Tasks;
@@ -22,11 +23,17 @@
     internal sealed class UpdateAccountCommandValidator : AbstractValidator<UpdateAccountCommand>
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly ValidationSettings opts;
 
-        public UpdateAccountCommandValidator(IUnitOfWork unitOfWork)
+        public UpdateAccountCommandValidator(IUnitOfWork unitOfWork, IOptions<ValidationSettings> options)
         {
             this.unitOfWork = unitOfWork;
+            this.opts = options.Value;
             RuleFor(a => a.Id).NotEmpty();
+            When(a => a.Name is not null, () =>
+            {
+                RuleFor(a => a.Name).MaximumLength(opts.MaximumAccountNameLength);
+            });
         }
     }
 

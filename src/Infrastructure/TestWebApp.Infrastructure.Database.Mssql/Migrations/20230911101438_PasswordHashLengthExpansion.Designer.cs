@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestWebApp.Infrastructure.Database.Mssql.Internal;
 
@@ -11,9 +12,11 @@ using TestWebApp.Infrastructure.Database.Mssql.Internal;
 namespace TestWebApp.Infrastructure.Database.Mssql.Migrations
 {
     [DbContext(typeof(MssqlDbContext))]
-    partial class MssqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230911101438_PasswordHashLengthExpansion")]
+    partial class PasswordHashLengthExpansion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +28,6 @@ namespace TestWebApp.Infrastructure.Database.Mssql.Migrations
             modelBuilder.Entity("TestWebApp.Domain.Account", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Balance")
@@ -40,12 +42,7 @@ namespace TestWebApp.Infrastructure.Database.Mssql.Migrations
                         .HasMaxLength(32)
                         .HasColumnType("nvarchar(32)");
 
-                    b.Property<Guid>("OwnerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("OwnerId");
 
                     b.ToTable("Accounts", (string)null);
                 });
@@ -53,7 +50,6 @@ namespace TestWebApp.Infrastructure.Database.Mssql.Migrations
             modelBuilder.Entity("TestWebApp.Domain.Transaction", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
@@ -66,14 +62,9 @@ namespace TestWebApp.Infrastructure.Database.Mssql.Migrations
                     b.Property<Guid>("FromId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ToId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("FromId");
-
-                    b.HasIndex("ToId");
 
                     b.ToTable("Transactions", (string)null);
                 });
@@ -111,7 +102,7 @@ namespace TestWebApp.Infrastructure.Database.Mssql.Migrations
                 {
                     b.HasOne("TestWebApp.Domain.User", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -123,12 +114,12 @@ namespace TestWebApp.Infrastructure.Database.Mssql.Migrations
                     b.HasOne("TestWebApp.Domain.Account", "From")
                         .WithMany()
                         .HasForeignKey("FromId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TestWebApp.Domain.Account", "To")
                         .WithMany()
-                        .HasForeignKey("ToId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

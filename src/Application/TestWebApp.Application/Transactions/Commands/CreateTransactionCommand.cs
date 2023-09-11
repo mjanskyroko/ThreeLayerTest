@@ -7,8 +7,6 @@
 
     public class CreateTransactionCommand : IRequest
     {
-        public Guid Id { get; set; }
-
         public Guid From { get; set; }
 
         public Guid To { get; set; }
@@ -23,9 +21,17 @@
         public CreateTransactionCommandValidator(IUnitOfWork accounts)
         {
             this.unitOfWork = accounts;
-            RuleFor(t => t.From).NotEmpty().MustAsync(AccountExists);
+            RuleFor(t => t.From).NotEmpty()
+                                .Must((t, _) => DifferentAccounts(t)).WithMessage("Receiving and sending accounts must be different.")
+                                .MustAsync(AccountExists);
             RuleFor(t => t.To).NotEmpty().MustAsync(AccountExists);
             RuleFor(t => t.Amount).GreaterThan(0m);
+
+        }
+
+        public bool DifferentAccounts(CreateTransactionCommand t)
+        {
+            return t.From != t.To;
         }
 
         public async Task<bool> AccountExists(Guid id, CancellationToken cancellationToken)
@@ -47,9 +53,15 @@
         public async Task Handle(CreateTransactionCommand request, CancellationToken cancellationToken)
         {
             Transaction t = new Transaction();
+
+            Task<Account> from = unitOfWork.Accounts.GetByIdSafeAsync(request.From, cancellationToken);
+            Task<Account> to = unitOfWork.Accounts.GetByIdSafeAsync(request.To, cancellationToken);
+
             t.Id = Guid.NewGuid();
-            t.From = await unitOfWork.Accounts.GetByIdSafeAsync(request.From, cancellationToken);
-            t.To = await unitOfWork.Accounts.GetByIdSafeAsync(request.To, cancellationToken);
+            t.From = await from;
+            t.FromId = t.From.Id;
+            t.To = await to;
+            t.ToId = t.To.Id;
             t.Amount = request.Amount;
             t.CreatedAt = DateTime.UtcNow;
 

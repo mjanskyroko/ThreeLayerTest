@@ -11,7 +11,7 @@
             builder.ToTable("Users");
             builder.HasKey(u => u.Id);
             builder.Property(u => u.Name).HasMaxLength(32).IsRequired();
-            builder.Property(u => u.PasswordHash).HasMaxLength(32).IsRequired();
+            builder.Property(u => u.PasswordHash).HasMaxLength(48).IsRequired();
             builder.Property(u => u.Salt).HasMaxLength(32).IsRequired();
             builder.Property(u => u.CreatedAt).IsRequired();
         }

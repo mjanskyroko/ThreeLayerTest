@@ -26,7 +26,8 @@
         {
             this.unitOfWork = unitOfWork;
             this.opts = options.Value;
-            RuleFor(u => u.Name).NotEmpty().MinimumLength(opts.MinimumUsernameLength).MustAsync(IsUniqueName).WithMessage("Username already in use.");
+            RuleFor(u => u.Name).NotEmpty().MinimumLength(opts.MinimumUsernameLength).MaximumLength(opts.MaximumUsernameLength)
+                                .MustAsync(IsUniqueName).WithMessage("Username already in use.");
             RuleFor(u => u.Password).MinimumLength(opts.MinimumPasswordLength);
         }
 

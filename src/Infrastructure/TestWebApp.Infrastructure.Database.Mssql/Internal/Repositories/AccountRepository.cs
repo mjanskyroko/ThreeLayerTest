@@ -37,9 +37,10 @@
 
         public async Task<List<Account>> GetAsync(AccountFilter filter, CancellationToken cancellationToken)
         {
-            return await accounts.WhereIf(filter.OwnerId is not null, a => a.Owner.Id == filter.OwnerId)
+            return await accounts.WhereIf(filter.OwnerId is not null, a => a.OwnerId == filter.OwnerId)
                 .WhereIf(filter.Name is not null, a => a.Name == filter.Name)
                 .WhereIf(filter.IsActive is not null, a => a.IsActive == filter.IsActive)
+                .Include(a => a.Owner)
                 .Skip(filter.Offset).Take(filter.Limit).ToListAsync(cancellationToken);
         }
 

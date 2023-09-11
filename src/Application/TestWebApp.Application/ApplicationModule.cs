@@ -51,5 +51,9 @@
         public int MinimumPasswordLength { get; set; } = 8;
 
         public int MinimumUsernameLength { get; set; } = 3;
+
+        public int MaximumAccountNameLength { get; set; } = 32;
+
+        public int MaximumUsernameLength { get; set; } = 32;
     }
 }
