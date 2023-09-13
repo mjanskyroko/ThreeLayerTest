@@ -2,6 +2,7 @@
 {
     using FluentValidation;
     using MediatR;
+    using System.Threading;
     using TestWebApp.Application.Contracts.Database;
     using TestWebApp.Domain;
 
@@ -22,19 +23,25 @@
         {
             this.unitOfWork = accounts;
             RuleFor(t => t.From).NotEmpty()
-                                .Must((t, _) => DifferentAccounts(t)).WithMessage("Receiving and sending accounts must be different.")
+                                .MustAsync((t, _, token) => AccountExistsAndHasMeans(t, token));
+            RuleFor(t => t.To).NotEmpty().Must((t, _) => DifferentAccounts(t)).WithMessage("Receiving and sending accounts must be different.")
                                 .MustAsync(AccountExists);
-            RuleFor(t => t.To).NotEmpty().MustAsync(AccountExists);
             RuleFor(t => t.Amount).GreaterThan(0m);
 
         }
 
-        public bool DifferentAccounts(CreateTransactionCommand t)
+        private bool DifferentAccounts(CreateTransactionCommand t)
         {
             return t.From != t.To;
         }
 
-        public async Task<bool> AccountExists(Guid id, CancellationToken cancellationToken)
+        private async Task<bool> AccountExistsAndHasMeans(CreateTransactionCommand t, CancellationToken cancellationToken)
+        {
+            Account? account = await unitOfWork.Accounts.GetByIdAsync(t.From, cancellationToken);
+            return account is not null && t.Amount <= account.Balance;
+        }
+
+        private async Task<bool> AccountExists(Guid id, CancellationToken cancellationToken)
         {
             Account? account = await unitOfWork.Accounts.GetByIdAsync(id, cancellationToken);
             return account is not null;
@@ -54,17 +61,25 @@
         {
             Transaction t = new Transaction();
 
-            Task<Account> from = unitOfWork.Accounts.GetByIdSafeAsync(request.From, cancellationToken);
-            Task<Account> to = unitOfWork.Accounts.GetByIdSafeAsync(request.To, cancellationToken);
+            Task<Account> taskFrom = unitOfWork.Accounts.GetByIdSafeAsync(request.From, cancellationToken);
+            Task<Account> taskTo = unitOfWork.Accounts.GetByIdSafeAsync(request.To, cancellationToken);
+
+            Account from = await taskFrom;
+            Account to = await taskTo;
 
             t.Id = Guid.NewGuid();
-            t.From = await from;
-            t.FromId = t.From.Id;
-            t.To = await to;
-            t.ToId = t.To.Id;
+            t.From = from;
+            t.FromId = from.Id;
+            t.To = to;
+            t.ToId = to.Id;
             t.Amount = request.Amount;
             t.CreatedAt = DateTime.UtcNow;
 
+            from.Balance -= request.Amount;
+            to.Balance += request.Amount;
+
+            unitOfWork.Accounts.Update(from);
+            unitOfWork.Accounts.Update(to);
             unitOfWork.Transactions.Create(t);
             await unitOfWork.SaveChangesAsync(cancellationToken);
         }
