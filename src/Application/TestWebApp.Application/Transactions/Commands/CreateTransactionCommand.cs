@@ -23,9 +23,9 @@
         {
             this.unitOfWork = accounts;
             RuleFor(t => t.From).NotEmpty()
-                                .MustAsync((t, _, token) => AccountExistsAndHasMeans(t, token));
+                                .MustAsync((t, _, token) => AccountExistsAndHasMeans(t, token)).WithMessage("Account must exist and have at least the specified amount.");
             RuleFor(t => t.To).NotEmpty().Must((t, _) => DifferentAccounts(t)).WithMessage("Receiving and sending accounts must be different.")
-                                .MustAsync(AccountExists);
+                                .MustAsync(AccountExists).WithMessage("Account must exist.");
             RuleFor(t => t.Amount).GreaterThan(0m);
 
         }
