@@ -1,0 +1,18 @@
+{
+    "Users": [
+        {
+            "Id": "e93fd148-55a7-4cc1-95b8-29b5d3796b32",
+            "Name": "testuser",
+            "PasswordHash": "jEiNn9pT98t3Sawu7/e2RoqepxNR/44OSSlOlW6UW+A=",
+            "Salt": "1v+5CyaXolWU8n2d",
+            "CreatedAt": "2023-09-11 12:33:27.571"
+        },
+        {
+            "Id": "5C1BF8AC-9BE4-468C-A639-2F34E26CF232",
+            "Name": "heisenberg",
+            "PasswordHash": "rg/6+Y2+7eLev6/XgiRzQCkbqVcpbzhbXDvmNGO106s=",
+            "Salt": "kRJ0YpeDlDg=",
+            "CreatedAt": "2023-09-11 13:37:42.069"
+        }
+    ]
+}
