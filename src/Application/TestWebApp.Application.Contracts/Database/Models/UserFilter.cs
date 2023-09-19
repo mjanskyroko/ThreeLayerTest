@@ -6,7 +6,9 @@
     {
         public string? Name { get; set; }
 
-        public DateTime? JoinDate { get; set; }
+        public DateTime? JoinDateFrom { get; set; }
+
+        public DateTime? JoinDateTo { get; set; }
 
         public int Offset { get; set; }
 

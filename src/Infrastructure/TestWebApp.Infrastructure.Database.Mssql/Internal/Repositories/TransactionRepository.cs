@@ -11,7 +11,7 @@
     using TestWebApp.Domain;
     using TestWebApp.Infrastructure.Database.Mssql.Internal.Extensions;
 
-    public sealed class TransactionRepository : ITransactionRepository
+    internal sealed class TransactionRepository : ITransactionRepository
     {
         private readonly DbSet<Transaction> transactions;
         private readonly DbSet<Account> accounts;
@@ -19,7 +19,7 @@
         public TransactionRepository(MssqlDbContext context)
         {
             transactions = context.Set<Transaction>();
-            accounts = context.Set<Account>();
+            accounts = context.Set<Account>(); 
         }
 
         public void Create(Transaction u)

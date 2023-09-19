@@ -6,7 +6,7 @@
     using TestWebApp.Domain;
     using TestWebApp.Infrastructure.Database.Mssql.Internal.Extensions;
 
-    public sealed class UserRepository : IUserRepository
+    internal sealed class UserRepository : IUserRepository
     {
         private readonly DbSet<User> users;
 
@@ -32,8 +32,9 @@
 
         public async Task<List<User>> GetAsync(UserFilter filter, CancellationToken cancellationToken)
         {
-            return await users.WhereIf(filter.Name is not null, u => u.Name.StartsWith(filter.Name!))
-                .WhereIf(filter.JoinDate is not null, u => u.CreatedAt >= filter.JoinDate!)
+            return await users.WhereIf(filter.Name is not null, u => u.Name == filter.Name!)
+                .WhereIf(filter.JoinDateFrom is not null, u => u.CreatedAt >= filter.JoinDateFrom!)
+                .WhereIf(filter.JoinDateTo is not null, u => u.CreatedAt <= filter.JoinDateTo!)
                 .Skip(filter.Offset).Take(filter.Limit)
                 .ToListAsync(cancellationToken);
         }

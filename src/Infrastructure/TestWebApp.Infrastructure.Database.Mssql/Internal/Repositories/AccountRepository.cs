@@ -11,7 +11,7 @@
     using TestWebApp.Domain;
     using TestWebApp.Infrastructure.Database.Mssql.Internal.Extensions;
 
-    public sealed class AccountRepository : IAccountRepository
+    internal sealed class AccountRepository : IAccountRepository
     {
         private readonly DbSet<Account> accounts;
 
