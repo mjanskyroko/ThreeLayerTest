@@ -28,9 +28,10 @@
                     reader.Close();
                 }
 
-                foreach (var item in toDelete)
+
+                for (int i = toDelete.Count - 1; i >= 0; i--)
                 {
-                    var delete = new SqlCommand($"DELETE FROM {item}", conn);
+                    var delete = new SqlCommand($"DELETE FROM {toDelete[i]}", conn);
                     delete.ExecuteNonQuery();
                 }
 
