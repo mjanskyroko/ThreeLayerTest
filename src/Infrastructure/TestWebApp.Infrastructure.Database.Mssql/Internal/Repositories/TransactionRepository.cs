@@ -56,7 +56,7 @@
             List<Transaction> transactions = new List<Transaction>(accs.Capacity);
             foreach (var account in accs)
                 transactions.AddRange(await GetWithAccountAsync(account.Id, cancellationToken));
-            return transactions;
+            return transactions.DistinctBy(t => t.Id).ToList(); // TODO: fix using stored procedure
         }
     }
 }
