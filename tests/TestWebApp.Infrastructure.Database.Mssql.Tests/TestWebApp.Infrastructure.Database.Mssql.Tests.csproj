@@ -38,9 +38,14 @@
     <None Update="Seeds\accounts-db.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Seeds\transactions-db.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Seeds\users-db.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties seeds_4transactions-db_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

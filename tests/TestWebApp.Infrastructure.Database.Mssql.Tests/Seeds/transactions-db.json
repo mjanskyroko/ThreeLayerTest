@@ -1,0 +1,64 @@
+{
+    "Users": [
+        {
+            "Id": "e93fd148-55a7-4cc1-95b8-29b5d3796b32",
+            "Name": "testuser",
+            "PasswordHash": "jEiNn9pT98t3Sawu7/e2RoqepxNR/44OSSlOlW6UW+A=",
+            "Salt": "1v+5CyaXolWU8n2d",
+            "CreatedAt": "2023-09-11 12:33:27.571"
+        },
+        {
+            "Id": "5c1bf8ac-9be4-468c-a639-2f34e26cf232",
+            "Name": "heisenberg",
+            "PasswordHash": "rg/6+Y2+7eLev6/XgiRzQCkbqVcpbzhbXDvmNGO106s=",
+            "Salt": "kRJ0YpeDlDg=",
+            "CreatedAt": "2023-09-11 13:37:42.069"
+        }
+    ],
+    "Accounts": [
+        {
+            "Id": "c77f4638-cdde-49c7-a24a-f6d858ff6394",
+            "Name": "testacc",
+            "Balance": 420.69,
+            "IsActive": 1,
+            "OwnerId": "e93fd148-55a7-4cc1-95b8-29b5d3796b32"
+        },
+        {
+            "Id": "1b8d6b4d-64c4-4161-b17f-32a43ece888c",
+            "Name": "cook",
+            "Balance": 1500000.00,
+            "IsActive": 0,
+            "OwnerId": "5c1bf8ac-9be4-468c-a639-2f34e26cf232"
+        },
+        {
+            "Id": "9a0687e6-96ee-4429-87fc-aadecc138add",
+            "Name": "capn",
+            "Balance": 1671.34,
+            "IsActive": 1,
+            "OwnerId": "5c1bf8ac-9be4-468c-a639-2f34e26cf232"
+        }
+    ],
+    "Transactions": [
+        {
+            "Id": "4c5e5583-6ccc-45af-ad1a-68775d52f802",
+            "FromId": "1b8d6b4d-64c4-4161-b17f-32a43ece888c",
+            "ToId": "9a0687e6-96ee-4429-87fc-aadecc138add",
+            "CreatedAt": "2023-09-17 18:28:53.131",
+            "Amount": 1337.42
+        },
+        {
+            "Id": "9fd7992b-e5fc-43ae-bfb1-1f045aa9e97a",
+            "FromId": "9a0687e6-96ee-4429-87fc-aadecc138add",
+            "ToId": "c77f4638-cdde-49c7-a24a-f6d858ff6394",
+            "CreatedAt": "2023-09-15 06:06:06.666",
+            "Amount": 666.66
+        },
+        {
+            "Id": "afa9576d-42ca-4b9e-8614-d25ac8a27370",
+            "FromId": "9a0687e6-96ee-4429-87fc-aadecc138add",
+            "ToId": "c77f4638-cdde-49c7-a24a-f6d858ff6394",
+            "CreatedAt": "2023-09-15 18:12:11.666",
+            "Amount": 3821.00
+        }
+    ]
+}
