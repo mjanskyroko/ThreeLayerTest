@@ -12,7 +12,7 @@
     using TestWebApp.Application.Contracts.Database.Models;
     using TestWebApp.Domain;
 
-    public record GetAccountsQuery(Guid? OwnerId, string? Name, bool? IsActive, int Offset, int Limit) : IRequest<List<AccountResponse>>;
+    public record GetAccountsQuery(Guid? OwnerId, string? Name, decimal? BalanceMinimum, decimal? BalanceMaximum, bool? IsActive, int Offset, int Limit) : IRequest<List<AccountResponse>>;
 
     internal sealed class GetAccountsQueryValidator : AbstractValidator<GetAccountsQuery>
     {
@@ -45,6 +45,8 @@
             filter.IsActive = request.IsActive;
             filter.Offset = request.Offset;
             filter.Limit = request.Limit;
+            filter.BalanceMinimum = request.BalanceMinimum;
+            filter.BalanceMaximum = request.BalanceMaximum;
 
             List<Account> result = await unitOfWork.Accounts.GetAsync(filter, cancellationToken);
             return mapper.Map<List<AccountResponse>>(result);

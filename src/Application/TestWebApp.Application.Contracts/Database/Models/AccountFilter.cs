@@ -8,6 +8,10 @@
 
         public Guid? OwnerId { get; set; }
 
+        public decimal? BalanceMinimum { get; set; }
+
+        public decimal? BalanceMaximum { get; set; }
+
         public bool? IsActive { get; set; }
 
         public int Offset { get; set; }
